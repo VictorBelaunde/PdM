@@ -57,13 +57,14 @@ void delayInit( delay_t *delay, tick_t duration){
 
 
 bool_t delayRead( delay_t *delay ){
-	bool_t finish = false;
+	bool_t finish;
 	uint32_t duracion_actual;
 	uint32_t cuenta_duracion;
 
 	if (delay->running == false){
 		delay->running = true;
 		delay->startTime = HAL_GetTick();//Como se que se inicializa y donde se encuentra????
+		finish = false;
 	}
 	else {
 		duracion_actual = HAL_GetTick();

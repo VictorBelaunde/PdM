@@ -3450,29 +3450,28 @@ bool_t delayRead( delay_t *delay ){
  80016bc:	b086      	sub	sp, #24
  80016be:	af00      	add	r7, sp, #0
  80016c0:	6078      	str	r0, [r7, #4]
-	bool_t finish;
+	bool_t finish = false;
+ 80016c2:	2300      	movs	r3, #0
+ 80016c4:	75fb      	strb	r3, [r7, #23]
 	uint32_t duracion_actual;
 	uint32_t cuenta_duracion;
 
 	if (delay->running == false){
- 80016c2:	687b      	ldr	r3, [r7, #4]
- 80016c4:	7a1b      	ldrb	r3, [r3, #8]
- 80016c6:	f083 0301 	eor.w	r3, r3, #1
- 80016ca:	b2db      	uxtb	r3, r3
- 80016cc:	2b00      	cmp	r3, #0
- 80016ce:	d00a      	beq.n	80016e6 <delayRead+0x2c>
+ 80016c6:	687b      	ldr	r3, [r7, #4]
+ 80016c8:	7a1b      	ldrb	r3, [r3, #8]
+ 80016ca:	f083 0301 	eor.w	r3, r3, #1
+ 80016ce:	b2db      	uxtb	r3, r3
+ 80016d0:	2b00      	cmp	r3, #0
+ 80016d2:	d008      	beq.n	80016e6 <delayRead+0x2c>
 		delay->running = true;
- 80016d0:	687b      	ldr	r3, [r7, #4]
- 80016d2:	2201      	movs	r2, #1
- 80016d4:	721a      	strb	r2, [r3, #8]
+ 80016d4:	687b      	ldr	r3, [r7, #4]
+ 80016d6:	2201      	movs	r2, #1
+ 80016d8:	721a      	strb	r2, [r3, #8]
 		delay->startTime = HAL_GetTick();//Como se que se inicializa y donde se encuentra????
- 80016d6:	f7ff f853 	bl	8000780 <HAL_GetTick>
- 80016da:	4602      	mov	r2, r0
- 80016dc:	687b      	ldr	r3, [r7, #4]
- 80016de:	601a      	str	r2, [r3, #0]
-		finish = false;
- 80016e0:	2300      	movs	r3, #0
- 80016e2:	75fb      	strb	r3, [r7, #23]
+ 80016da:	f7ff f851 	bl	8000780 <HAL_GetTick>
+ 80016de:	4602      	mov	r2, r0
+ 80016e0:	687b      	ldr	r3, [r7, #4]
+ 80016e2:	601a      	str	r2, [r3, #0]
  80016e4:	e00e      	b.n	8001704 <delayRead+0x4a>
 	}
 	else {

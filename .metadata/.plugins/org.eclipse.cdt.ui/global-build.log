@@ -1,4 +1,4 @@
-17:58:14 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+18:15:46 **** Incremental Build of configuration Debug for project Ejercicio2 ****
 make -j7 all 
 arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F429ZITx -DSTM32F4 -DNUCLEO_F429ZI -DUSE_HAL_DRIVER -DSTM32F429xx -c -I../Inc -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Maestria/PdM/Practicas/PdM/Ejercicio2/Drivers/STM32F4xx_HAL_Driver/Inc" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Maestria/PdM/Practicas/PdM/Ejercicio2/Drivers/CMSIS/Include" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Maestria/PdM/Practicas/PdM/Ejercicio2/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Maestria/PdM/Practicas/PdM/Ejercicio2/Drivers/BSP/STM32F4xx_Nucleo_144" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Maestria/PdM/Practicas/PdM/Ejercicio2/Drivers/Core/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
 arm-none-eabi-gcc -o "Ejercicio2.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/VictorBelaunde/Documents/BKP Victor 2022/Maestria/PdM/Practicas/PdM/Ejercicio2/STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -12,7 +12,7 @@ Finished building: default.size.stdout
  
 Finished building: Ejercicio2.list
  
-17:58:19 **** Incremental Build of configuration Debug for project Ejercicio2 ****
+18:15:50 **** Incremental Build of configuration Debug for project Ejercicio2 ****
 make -j7 all 
 arm-none-eabi-size   Ejercicio2.elf 
    text	   data	    bss	    dec	    hex	filename
