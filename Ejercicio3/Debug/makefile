@@ -65,8 +65,8 @@ all: main-build
 main-build: Ejercicio3.elf secondary-outputs
 
 # Tool invocations
-Ejercicio3.elf Ejercicio3.map: $(OBJS) $(USER_OBJS) /Users/VictorBelaunde/Documents/BKP\ Victor\ 2022/Maestria/PdM/Practicas/PdM/Ejercicio3/STM32F429ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Ejercicio3.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/VictorBelaunde/Documents/BKP Victor 2022/Maestria/PdM/Practicas/PdM/Ejercicio3/STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Ejercicio3.elf Ejercicio3.map: $(OBJS) $(USER_OBJS) /Users/VictorBelaunde/Documents/BKP\ Victor\ 2022/Victor/CESE_FIUBA/PdM/Ejercicio3/STM32F429ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Ejercicio3.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ejercicio3/STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio3.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
