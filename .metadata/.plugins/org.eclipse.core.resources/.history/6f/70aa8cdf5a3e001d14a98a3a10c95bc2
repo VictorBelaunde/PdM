@@ -1,0 +1,114 @@
+/*******************************************************************************
+ * @file    API_uart.c
+ * @author  Victor Belaunde
+ * @brief   Modulo para incializar e imprimir por el puerto UART
+ *******************************************************************************/
+
+
+/* Includes ------------------------------------------------------------------*/
+
+#include "API_uart.h"
+
+/**
+ * @brief	funcion que inicializa la UART
+ * @param	none
+ * @return	verdadero si inicio correctamente
+ */
+bool_t uartInit(){
+	/* UART configured as follows:
+	      - Word Length = 8 Bits (7 data bit + 1 parity bit) :
+		                  BE CAREFUL : Program 7 data bits + 1 parity bit in PC HyperTerminal
+	      - Stop Bit    = One Stop bit
+	      - Parity      = ODD parity
+	      - BaudRate    = 9600 baud
+	      - Hardware flow control disabled (RTS and CTS signals) */
+	UartHandle.Instance        = USARTx;
+	UartHandle.Init.BaudRate   = 9600;
+	UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
+	UartHandle.Init.StopBits   = UART_STOPBITS_1;
+	UartHandle.Init.Parity     = UART_PARITY_ODD;
+	UartHandle.Init.HwFlowCtl  = UART_HWCONTROL_NONE;
+	UartHandle.Init.Mode       = UART_MODE_TX_RX;
+	UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
+	bool_t init_uart_ok = false;
+
+	if (HAL_UART_Init(&UartHandle) = HAL_OK)
+	{
+		init_uart_ok = true;
+		printf("Inicializacion exitosa");
+
+	}
+
+	return init_uart_ok;
+}
+
+
+/**
+ * @brief	funcion que transmite un mensaje por UART
+ * @param	puntero a la cadena que envia
+ * @return	none
+ */
+void uartSendString(uint8_t * pstring){
+
+	if (pstring == !NULL){
+		uint16_t tamaño_mensaje = (uint16_t) strlen((char *) pstring); //Calcula el tamaño del mensaje
+
+		HAL_UART_Transmit(&UartHandle, pstring, tamaño_mensaje, tiempo_max_espera);
+	}
+
+}
+
+/**
+ * @brief	funcion que transmite un mensaje por UART acotado por una cantidad de caracteres
+ * @param	puntero a la cadena que envia y cantidad de caracteres
+ * @return	none
+ */
+void uartSendStringSize(uint8_t * pstring, uint16_t size){
+	uint16_t max_mensaje = TAMAÑO_MAXIMO_MENSAJE
+	if (pstring==!NULL){
+		uint16_t tamaño_mensaje = (uint16_t) strlen((char *) pstring); //Calcula el tamaño del mensaje
+		if (size > tamaño_mensaje){
+			size = tamaño_mensaje;
+		}
+		if (size > max_mensaje){
+			size = max_mensaje;
+		}
+		HAL_UART_Transmit(&UartHandle, pstring, size, tiempo_max_espera);
+	}
+
+
+}
+
+void uartReceiveStringSize(uint8_t * pstring, uint16_t size);
+
+
+
+// Funcion para determinar que finalizó el retardo,
+// devolviendo verdadero en estarlo
+
+bool_t delayRead( delay_t *delay ){
+	bool_t finish = false;
+	uint32_t duracion_actual;
+	uint32_t cuenta_duracion;
+
+	if (delay->running == false){
+		delay->running = true;
+		delay->startTime = HAL_GetTick(); //Funcion para obtener una marca de tiempo
+	}
+	else {
+		duracion_actual = HAL_GetTick();
+		cuenta_duracion = duracion_actual - delay->startTime;
+		if (cuenta_duracion > delay->duration){
+			finish = true;
+			delay->running = false;
+
+		}
+	}
+	return finish;
+}
+
+//Funcion para redefinir el retardo
+
+void delayWrite( delay_t *delay, tick_t duration ){
+	delay->duration = duration;
+}

@@ -28,8 +28,6 @@ static void Error_Handler(void);
 
 
 /* Private functions ---------------------------------------------------------*/
-
-
 /**
  * @brief  Main program
  * @param  None

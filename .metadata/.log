@@ -1395,3 +1395,15 @@ java.lang.Exception: File: /Users/VictorBelaunde/Documents/BKP Victor 2022/Victo
 
 !ENTRY org.eclipse.cdt.core 1 0 2022-09-17 09:12:01.394
 !MESSAGE Indexed 'Ejercicio4_B' (100 sources, 211 headers) in 8,81 sec: 29.872 declarations; 94.531 references; 2 unresolved inclusions; 42 syntax errors; 147 unresolved names (0,12 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-09-25 19:07:13.846
+!MESSAGE Indexed 'Ej2_uart' (99 sources, 208 headers) in 7,92 sec: 29.550 declarations; 93.736 references; 2 unresolved inclusions; 42 syntax errors; 147 unresolved names (0,12 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-09-26 22:27:44.067
+!MESSAGE Indexed 'Ejercicio5' (99 sources, 208 headers) in 8,55 sec: 29.551 declarations; 93.739 references; 2 unresolved inclusions; 42 syntax errors; 147 unresolved names (0,12 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-09-27 05:14:05.761
+!MESSAGE Indexed 'Ejercicio5_A' (0 sources, 0 headers) in 0,001 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0 %)
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-09-27 09:14:17.330
+!MESSAGE Indexed 'Ejercicio5_A' (102 sources, 216 headers) in 8,25 sec: 30.102 declarations; 94.819 references; 2 unresolved inclusions; 42 syntax errors; 174 unresolved names (0,14 %)
