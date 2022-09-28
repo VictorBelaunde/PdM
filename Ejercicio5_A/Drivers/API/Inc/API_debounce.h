@@ -29,7 +29,7 @@ typedef enum{
 } debounceState_t;
 
 
-bool_t readKey(); //funcion interna del módulo para devolver true o false si la tecla fue presionada
+bool_t readKey_descendente(); //funcion interna del módulo para devolver true o false si la tecla fue presionada
 
 /* Exported functions ------------------------------------------------------- */
 void debounceFSM_init();	// Carga el estado inicial de la MEF

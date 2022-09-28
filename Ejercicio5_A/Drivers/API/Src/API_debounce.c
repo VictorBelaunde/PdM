@@ -65,7 +65,7 @@ void debounceFSM_update(){
  * si la tecla fue presionada.  Si devuelve true, resetea (pone en false) el estado
  * de la variable.*/
 
-bool_t readKey(){
+bool_t readKey_descendente(){
 	bool_t returnValue = false;
 			if (fallingOk){
 				fallingOk = false;

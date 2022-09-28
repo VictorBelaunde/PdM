@@ -1,31 +1,7 @@
-11:02:50 **** Incremental Build of configuration Debug for project Ejercicio5_A ****
+14:31:47 **** Incremental Build of configuration Debug for project Ejercicio5_B ****
 make -j7 all 
-arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F429ZITx -DSTM32F4 -DNUCLEO_F429ZI -DUSE_HAL_DRIVER -DSTM32F429xx -c -I../Inc -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ejercicio5_A/Drivers/STM32F4xx_HAL_Driver/Inc" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ejercicio5_A/Drivers/CMSIS/Include" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ejercicio5_A/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ejercicio5_A/Drivers/BSP/STM32F4xx_Nucleo_144" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ejercicio5_A/Drivers/Core/Inc" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ejercicio5_A/Drivers" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ejercicio5_A/Drivers/API/Src" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ejercicio5_A/Drivers/API/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
-../Src/main.c: In function 'main':
-../Src/main.c:79:5: warning: implicit declaration of function 'uartInit' [-Wimplicit-function-declaration]
-   79 | if (uartInit()==true){
-      |     ^~~~~~~~
-../Src/main.c:81:2: warning: implicit declaration of function 'uartSendString' [-Wimplicit-function-declaration]
-   81 |  uartSendString(msj);
-      |  ^~~~~~~~~~~~~~
-../Src/main.c:82:2: warning: implicit declaration of function 'uartSendStringSize' [-Wimplicit-function-declaration]
-   82 |  uartSendStringSize(msj,2);
-      |  ^~~~~~~~~~~~~~~~~~
-arm-none-eabi-gcc -o "Ejercicio5_A.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ejercicio5_A/STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ejercicio5_A.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: Ejercicio5_A.elf
- 
-arm-none-eabi-size   Ejercicio5_A.elf 
-arm-none-eabi-objdump -h -S  Ejercicio5_A.elf  > "Ejercicio5_A.list"
+arm-none-eabi-size   Ejercicio5_B.elf 
    text	   data	    bss	    dec	    hex	filename
-  13440	    136	   1656	  15232	   3b80	Ejercicio5_A.elf
-Finished building: default.size.stdout
- 
-Finished building: Ejercicio5_A.list
- 
-11:02:56 **** Incremental Build of configuration Debug for project Ejercicio5_A ****
-make -j7 all 
-arm-none-eabi-size   Ejercicio5_A.elf 
-   text	   data	    bss	    dec	    hex	filename
-  13440	    136	   1656	  15232	   3b80	Ejercicio5_A.elf
+   7744	     36	   1668	   9448	   24e8	Ejercicio5_B.elf
 Finished building: default.size.stdout
  
