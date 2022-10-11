@@ -1,0 +1,54 @@
+/*******************************************************************************
+* @file    API_clima.h
+* @author  Victor Belaunde
+* @brief   Modulo para controlar los estados del CLIMA por medio de mediciones de temperatura
+
+*******************************************************************************/
+
+
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __API_CLIMA_H
+#define __API_CLIMA_H
+
+
+/*******************************************************************************
+ * Defines
+ ******************************************************************************/
+#define RETARDO 40
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+#include <stdio.h>
+#include "stm32f4xx_hal.h"  		/* <- HAL include */
+#include "stm32f4xx_nucleo_144.h" 	/* <- BSP include */
+#include <stdint.h>
+#include <stdbool.h>
+
+/*******************************************************************************
+ * Public global variables
+ ******************************************************************************/
+
+typedef bool bool_t;
+
+typedef enum{
+	CALIBRACION,
+	FRIO,
+	CALIDO,
+	REPOSO,
+} ClimaState_t;
+
+/*******************************************************************************
+ * Function prototypes
+ ******************************************************************************/
+
+bool_t readKey_descendente(); //funcion interna del módulo para devolver true o false si la tecla fue presionada
+
+void climaMEF_init();	// Carga el estado inicial de la MEF (CALIBRACIÓN)
+
+void climaMEF_update();	// Lee las entradas y resuelve la lógica de transición de estados (FRIO, CALIDO Y REPOSO)
+
+
+
+#endif /* __API_CLIMA_H */
+

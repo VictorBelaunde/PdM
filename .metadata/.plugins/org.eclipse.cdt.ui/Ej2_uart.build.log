@@ -1,10 +1,30 @@
-18:16:33 **** Incremental Build of configuration Debug for project Ej2_uart ****
+01:11:05 **** Incremental Build of configuration Debug for project Ej2_uart ****
 make -j7 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F429ZITx -DSTM32F4 -DNUCLEO_F429ZI -DUSE_HAL_DRIVER -DSTM32F429xx -c -I../Inc -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ej2_uart/Drivers/STM32F4xx_HAL_Driver/Inc" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ej2_uart/Drivers/CMSIS/Include" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ej2_uart/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ej2_uart/Drivers/BSP/STM32F4xx_Nucleo_144" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ej2_uart/Drivers/Core/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.c: In function 'main':
+../Src/main.c:107:34: warning: pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+  107 |   HAL_UART_Transmit(&UartHandle, dato, sizeof(dato), 0xFFFF);
+      |                                  ^~~~
+      |                                  |
+      |                                  char *
+In file included from ../Inc/stm32f4xx_hal_conf.h:405,
+                 from /Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ej2_uart/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:30,
+                 from ../Inc/main.h:26,
+                 from ../Src/main.c:22:
+/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ej2_uart/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:723:73: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'char *'
+  723 | HAL_StatusTypeDef HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size, uint32_t Timeout);
+      |                                                                ~~~~~~~~~^~~~~
+arm-none-eabi-gcc -o "Ej2_uart.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/Ej2_uart/STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Ej2_uart.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Ej2_uart.elf
+ 
 arm-none-eabi-size   Ej2_uart.elf 
+arm-none-eabi-objdump -h -S  Ej2_uart.elf  > "Ej2_uart.list"
    text	   data	    bss	    dec	    hex	filename
-  13348	    132	   1660	  15140	   3b24	Ej2_uart.elf
+  13260	    132	   1660	  15052	   3acc	Ej2_uart.elf
 Finished building: default.size.stdout
  
+Finished building: Ej2_uart.list
+ 
 
-18:16:33 Build Finished. 0 errors, 0 warnings. (took 413ms)
+01:11:06 Build Finished. 0 errors, 1 warnings. (took 985ms)
 

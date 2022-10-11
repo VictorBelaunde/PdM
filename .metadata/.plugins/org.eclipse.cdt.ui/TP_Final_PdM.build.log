@@ -1,0 +1,43 @@
+14:13:21 **** Incremental Build of configuration Debug for project TP_Final_PdM ****
+make -j7 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F429ZITx -DSTM32F4 -DNUCLEO_F429ZI -DUSE_HAL_DRIVER -DSTM32F429xx -c -I../Inc -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/TP_Final_PdM/Drivers/STM32F4xx_HAL_Driver/Inc" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/TP_Final_PdM/Drivers/CMSIS/Include" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/TP_Final_PdM/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/TP_Final_PdM/Drivers/BSP/STM32F4xx_Nucleo_144" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/TP_Final_PdM/Drivers/Core/Inc" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/TP_Final_PdM/Drivers" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/TP_Final_PdM/Drivers/API/Src" -I"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/TP_Final_PdM/Drivers/API/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.c: In function 'main':
+../Src/main.c:68:2: warning: implicit declaration of function 'gpio_inicia_pin_output' [-Wimplicit-function-declaration]
+   68 |  gpio_inicia_pin_output(); //Se incian los dos pines para emular los motores
+      |  ^~~~~~~~~~~~~~~~~~~~~~
+../Src/main.c:70:6: warning: implicit declaration of function 'uartInit' [-Wimplicit-function-declaration]
+   70 |  if (uartInit() != true){ //Controlo la inicializacion del UART para comunicarme por monitor serie e ingresar la temperatura (hardcode)
+      |      ^~~~~~~~
+../Src/main.c:76:2: warning: implicit declaration of function 'climaMEF_init' [-Wimplicit-function-declaration]
+   76 |  climaMEF_init(); //Inicializo la MEF con estado CALIBRACION
+      |  ^~~~~~~~~~~~~
+../Src/main.c:89:19: warning: implicit declaration of function 'uartReceiveStringSize' [-Wimplicit-function-declaration]
+   89 |   actividadUart = uartReceiveStringSize((uint8_t *) bufferLectura, 2); //Solo se recibe un true cuando hay actividad por uart y llena el buffer
+      |                   ^~~~~~~~~~~~~~~~~~~~~
+../Src/main.c:92:12: warning: implicit declaration of function 'convierteNumero' [-Wimplicit-function-declaration]
+   92 |    total = convierteNumero((uint8_t *) bufferLectura);
+      |            ^~~~~~~~~~~~~~~
+../Src/main.c:93:4: warning: implicit declaration of function 'actualizaTemperatura' [-Wimplicit-function-declaration]
+   93 |    actualizaTemperatura(total); //Se hardcodea la toma de temperatura con esta funcion que actualiza la variable del modulo API_toma_temp
+      |    ^~~~~~~~~~~~~~~~~~~~
+../Src/main.c:96:7: warning: implicit declaration of function 'delayRead'; did you mean 'delayRzead'? [-Wimplicit-function-declaration]
+   96 |   if (delayRead(&retardoTemp)== true){
+      |       ^~~~~~~~~
+      |       delayRzead
+../Src/main.c:97:4: warning: implicit declaration of function 'climaMEF_update' [-Wimplicit-function-declaration]
+   97 |    climaMEF_update();
+      |    ^~~~~~~~~~~~~~~
+arm-none-eabi-gcc -o "TP_Final_PdM.elf" @"objects.list"   -mcpu=cortex-m4 -T"/Users/VictorBelaunde/Documents/BKP Victor 2022/Victor/CESE_FIUBA/PdM/TP_Final_PdM/STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="TP_Final_PdM.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: TP_Final_PdM.elf
+ 
+arm-none-eabi-size   TP_Final_PdM.elf 
+arm-none-eabi-objdump -h -S  TP_Final_PdM.elf  > "TP_Final_PdM.list"
+   text	   data	    bss	    dec	    hex	filename
+  14492	    136	   1672	  16300	   3fac	TP_Final_PdM.elf
+Finished building: default.size.stdout
+ 
+Finished building: TP_Final_PdM.list
+ 
+
+14:13:23 Build Finished. 0 errors, 8 warnings. (took 1s.377ms)
+

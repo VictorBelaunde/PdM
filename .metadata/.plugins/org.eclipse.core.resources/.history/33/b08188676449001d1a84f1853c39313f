@@ -1,0 +1,39 @@
+/*******************************************************************************
+* @file    API_toma_temp.h
+* @author  Victor Belaunde
+* @brief   Modulo para tratar la toma de temperatura por el medio o sensor que sea
+
+*******************************************************************************/
+#ifndef API_TOMA_TEMP_H_
+#define API_TOMA_TEMP_H_
+
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+#include "main.h"
+#include <stdint.h>
+
+
+/*******************************************************************************
+ * Defines
+ ******************************************************************************/
+#define TEMPNULL 99
+
+/*******************************************************************************
+ * Function prototypes
+ ******************************************************************************/
+uint8_t tomaTemperatura(void);
+static void actualizaTemperatura(int valorTomado);
+
+static int temperatura = TEMPNULL; //Es un valor inicial que simula NULL
+
+/**
+ * @brief	Funcion para manejar los errores
+ * @param	none
+ * @return	none
+ */
+static void errorHandler(void);
+
+
+#endif /* API_TOMA_TEMP_H_ */

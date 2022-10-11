@@ -53,6 +53,12 @@ int main(void)
 
 	delayInit (&delay_led, durationLed);
 
+	if (uartInit()==true){
+		char msj[] = "hola\n\r";
+		uartSendString(msj);
+		uartSendStringSize(msj,8);
+		printf("** Test finished successfully. ** \n\r");
+	}
 
 
 	while (1) {

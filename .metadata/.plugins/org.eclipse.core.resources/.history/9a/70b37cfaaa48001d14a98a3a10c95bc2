@@ -1,0 +1,84 @@
+/*
+ * gpio.c
+ *
+ *  Created on: Oct 2, 2022
+ *      Author: VictorBelaunde
+ */
+
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+#include <API_gpio.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h> //Para que resuelva el tipo uint32_t
+
+
+
+void gpio_inicia_led(){
+
+	//INICIA LED "PB_0" por lo tanto GPIOB y GPIO_PIN_0 en su conjunto
+	GPIO_InitTypeDef seteo_gpio = {0};
+
+	__HAL_RCC_GPIOB_CLK_ENABLE();
+
+	seteo_gpio.Pin = GPIO_PIN_0 | GPIO_PIN_4; //Se agrega el operador "|" para sumar pines siempre que sea del mismo GRUPO
+	seteo_gpio.Mode = GPIO_MODE_OUTPUT_PP;
+	seteo_gpio.Pull = GPIO_NOPULL;
+	seteo_gpio.Speed = GPIO_SPEED_FREQ_LOW;
+
+	HAL_GPIO_Init(GPIOB, &seteo_gpio);
+}
+
+
+void gpio_write_led(estado_gpio estado_led){
+
+	if (estado_led == HIGH)
+	{
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);
+	}
+	else
+	{
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET);
+	}
+
+	}
+
+void gpio_write_led2(estado_gpio estado_led){
+
+	if (estado_led == HIGH)
+	{
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
+	}
+	else
+	{
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
+	}
+}
+
+void gpio_inicia_pin_input(void){
+	//INICIA LED PC_13 por lo tanto GPIOC con GPIO_PIN_13 y GPIO_PIN_0 con PULL UP.
+	GPIO_InitTypeDef seteo_gpio = {0};
+	__HAL_RCC_GPIOC_CLK_ENABLE();
+
+	seteo_gpio.Pin = GPIO_PIN_3 | GPIO_PIN_0;
+	seteo_gpio.Mode = GPIO_MODE_INPUT;
+	seteo_gpio.Pull = GPIO_PULLUP;
+	seteo_gpio.Speed = GPIO_SPEED_FREQ_LOW;
+
+	HAL_GPIO_Init(GPIOC, &seteo_gpio);
+}
+
+
+estado_gpio gpio_read_pin(void){
+	bool_t estado_pin = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_3);
+	return estado_pin;
+}
+
+estado_gpio gpio_read2_pin(void){
+	bool_t estado_pin = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0);
+	return estado_pin;
+}
+
+

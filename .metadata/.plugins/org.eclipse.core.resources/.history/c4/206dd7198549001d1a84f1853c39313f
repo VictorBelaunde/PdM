@@ -1,0 +1,131 @@
+/*******************************************************************************
+ * @file    API_activadores.c
+ * @author  Victor Belaunde
+ * @brief   Modulo para simular la activacion y desactivacion de Refrigeracion y Calefaccion por medio de GPIOs
+
+ *******************************************************************************/
+
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+#include <API_activadores.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h> //Para que resuelva el tipo uint32_t
+
+
+/**
+ * @brief  Funcion es para iniciar el GPIO_PIN_x en modo OUTPUT_PP a traves de HAL_GPIO_Init.
+ * Para los 2 pines que simulan los activadores.
+ * @param  None
+ * @return None
+ */
+void gpio_inicia_pin_output(){
+
+	//INICIA LED "PB_0" por lo tanto GPIOB y GPIO_PIN_0 en su conjunto
+	GPIO_InitTypeDef seteo_gpio = {0};
+
+	__HAL_RCC_GPIOB_CLK_ENABLE();
+
+	seteo_gpio.Pin = GPIO_PIN_12 | GPIO_PIN_4; //Se agrega el operador "|" para sumar pines siempre que sea del mismo GRUPO
+	seteo_gpio.Mode = GPIO_MODE_OUTPUT_PP;
+	seteo_gpio.Pull = GPIO_NOPULL;
+	seteo_gpio.Speed = GPIO_SPEED_FREQ_LOW;
+
+	HAL_GPIO_Init(GPIOB, &seteo_gpio);
+}
+
+
+/**
+ * @brief  Funcion para activar los mecanismos de calefaccion. Simula el motor que pueda implementarse luego
+ * Los 2 pines que simulan los activadores son el (12).
+ * @param  estado_gpio int HIGH o LOW
+ * @return None
+ */
+void activaCalefaccion(estado_gpio estado){
+
+	if (estado == HIGH)
+	{
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET);
+		printf("calefaccion activada");
+	}
+	else if (estado == LOW)
+	{
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
+		printf("calefaccion desactivada");
+	}
+	else {
+		errorHandler();
+	}
+
+}
+
+
+/**
+ * @brief  Funcion para activar los mecanismos de refrigeracion. Simula el motor que pueda implementarse luego
+ * Los 2 pines que simulan los activadores son el (4).
+ * @param  estado_gpio int HIGH o LOW
+ * @return None
+ */
+void activaRefrigeracion(estado_gpio estado){
+
+	if (estado == HIGH)
+	{
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_SET);
+	}
+	else if (estado == LOW)
+	{
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
+	}
+	else {
+		errorHandler();
+	}
+}
+
+
+
+
+/**
+ * @brief  Funcion es para iniciar el GPIO_PIN_x en modo INPUT a traves de HAL_GPIO_Init.
+ * NO SON UTILIZADOS EN ESTE TRABAJO PRACTICO
+ * @param  None
+ * @return None
+ */
+void gpio_inicia_pin_input(void){
+	//INICIA LED PC_13 por lo tanto GPIOC con GPIO_PIN_13 y GPIO_PIN_0 con PULL UP.
+	GPIO_InitTypeDef seteo_gpio = {0};
+	__HAL_RCC_GPIOC_CLK_ENABLE();
+
+	seteo_gpio.Pin = GPIO_PIN_3 | GPIO_PIN_0;
+	seteo_gpio.Mode = GPIO_MODE_INPUT;
+	seteo_gpio.Pull = GPIO_PULLUP;
+	seteo_gpio.Speed = GPIO_SPEED_FREQ_LOW;
+
+	HAL_GPIO_Init(GPIOC, &seteo_gpio);
+}
+
+
+estado_gpio gpio_read_pin(void){
+	bool_t estado_pin = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_3);
+	return estado_pin;
+}
+
+estado_gpio gpio_read2_pin(void){
+	bool_t estado_pin = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_0);
+	return estado_pin;
+}
+
+/**
+ * @brief	Funcion para manejar los errores
+ * @param	none
+ * @return	none
+ */
+void errorHandler()
+{
+	/* Turn LED3 on */
+	BSP_LED_On(LED1);
+	while (1)
+	{
+	}
+}

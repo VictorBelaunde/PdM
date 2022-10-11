@@ -1,0 +1,62 @@
+/*******************************************************************************
+* @file    API_gpio.h
+* @author  Victor Belaunde
+* @brief   Modulo para iniciar y manejar los GPIOs que utiliza la aplicación
+*******************************************************************************/
+
+#ifndef __API_ACTIVADORES_H_
+#define __API_ACTIVADORES_H_
+
+#include "main.h"
+
+
+//Estrucutura para manejar los estados de los pines
+typedef enum{
+LOW,
+HIGH
+}estado_gpio;
+
+typedef bool bool_t;
+
+/**
+ * @brief  Esta funcion es para iniciar el GPIO_PIN_x(led interno o NO) en modo GPIO_MODE_OUTPUT_PP a traves de HAL_GPIO_Init.
+ * @param  None
+ * @return None
+ */
+void gpio_inicia_pin_output(void);
+
+/**
+ * @brief  Estas funciones son para escribir en GPIO_PIN_x (led interno o NO) tanto LOW como HIGH por medio de GPIO_PIN_SET y GPIO_PIN_RESET.
+ * @param  Estado que puede ser LOW o HIGH por medio de una estructura
+ * @return None
+ */
+void activaCalefaccion(estado_gpio estado);
+
+void gpio_write_led2(estado_gpio estado);
+
+
+/**
+ * @brief  Esta funcion es para iniciar el GPIO_PIN_x(led interno o NO) en modo INPUT a traves de HAL_GPIO_Init.
+ * @param  None
+ * @return None
+ */
+void gpio_inicia_pin_input(void);
+
+
+/**
+ * @brief  Esta funcion es para leer en GPIO_PIN_x
+ * @param  None
+ * @return Devuelve HIGH o LOW segun lo leido en el PIN
+ */
+estado_gpio gpio_read_pin(void);
+
+estado_gpio gpio_read2_pin(void);
+
+/**
+ * @brief	Funcion para manejar los errores
+ * @param	none
+ * @return	none
+ */
+void errorHandler(void);
+
+#endif /* API_INC_GPIO_H_ */

@@ -1,10 +1,10 @@
-18:33:43 **** Incremental Build of configuration Debug for project Ejercicio5_A ****
+10:27:33 **** Incremental Build of configuration Debug for project Ejercicio5_A ****
 make -j7 all 
 arm-none-eabi-size   Ejercicio5_A.elf 
    text	   data	    bss	    dec	    hex	filename
-  13440	    136	   1656	  15232	   3b80	Ejercicio5_A.elf
+  13808	    132	   1660	  15600	   3cf0	Ejercicio5_A.elf
 Finished building: default.size.stdout
  
 
-18:33:43 Build Finished. 0 errors, 0 warnings. (took 479ms)
+10:27:34 Build Finished. 0 errors, 0 warnings. (took 585ms)
 

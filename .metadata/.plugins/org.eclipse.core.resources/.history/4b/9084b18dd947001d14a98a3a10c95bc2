@@ -1,0 +1,50 @@
+/*******************************************************************************
+* @file    API_clima.h
+* @author  Victor Belaunde
+* @brief   Modulo para controlar los estados del CLIMA por medio de mediciones de temperatura
+
+*******************************************************************************/
+
+
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __API_CLIMA_H
+#define __API_CLIMA_H
+
+#define RETARDO 40
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+#include <stdio.h>
+#include "stm32f4xx_hal.h"  		/* <- HAL include */
+#include "stm32f4xx_nucleo_144.h" 	/* <- BSP include */
+#include <stdint.h>
+#include <stdbool.h>
+
+/*******************************************************************************
+ * Private global variables
+ ******************************************************************************/
+
+typedef bool bool_t;
+
+typedef enum{
+	BUTTON_UP,
+	BUTTON_FALLING,
+	BUTTON_DOWN,
+	BUTTON_RAISING,
+} debounceState_t;
+
+/*******************************************************************************
+ * Funciones prototipos
+ ******************************************************************************/
+
+bool_t readKey_descendente(); //funcion interna del módulo para devolver true o false si la tecla fue presionada
+
+void debounceFSM_init();	// Carga el estado inicial de la MEF
+void debounceFSM_update();	// Lee las entradas y resuelve la lógica de transición de estados
+
+
+
+
+#endif /* __API_CLIMA_H */
+

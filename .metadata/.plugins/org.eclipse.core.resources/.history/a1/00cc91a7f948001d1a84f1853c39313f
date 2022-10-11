@@ -1,0 +1,57 @@
+/*******************************************************************************
+* @file    API_toma_temp.c
+* @author  Victor Belaunde
+* @brief   Modulo para trabajar la toma de temperatura por el medio o sensor que se defina
+*******************************************************************************/
+
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+#include <API_toma_temp.h>
+
+/*******************************************************************************
+ * Private global variables
+ ******************************************************************************/
+//none
+
+
+/**
+ * @brief	Funcion para enviar la temperatura y proteger el dato
+ * @param	none
+ * @return	un entero con el valor de la temperatura
+ */
+int tomaTemperatura(void){
+	if (temperatura != TEMPNULL){
+		return temperatura;
+	}
+	else{
+		errorHandler();
+	}
+}
+
+/**
+ * @brief	Funcion recibir la temperatura del sensor definido para cargarla en una variable local
+ * @param	valorTomado que es un entero que contiene la temperatura
+ * @return	none
+ */
+void actualizaTemperatura(valorTomado){
+	if (valorTomado != TEMPNULL){
+		temperatura = valorTomado;
+	}
+}
+
+
+/**
+ * @brief	Funcion para manejar los errores
+ * @param	none
+ * @return	none
+ */
+void errorHandler()
+{
+  /* Turn LED3 on */
+  BSP_LED_On(LED3);
+  while (1)
+  {
+  }
+}

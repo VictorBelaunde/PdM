@@ -1,0 +1,87 @@
+/*******************************************************************************
+ * @file    API_clima.c
+ * @author  Victor Belaunde
+ * @brief   Modulo para controlar los estados del CLIMA por medio de mediciones de temperatura
+
+ *******************************************************************************/
+
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+
+#include <API_clima.h>
+#include "API_delay.h" //necesita de esta API para trabajar con retardos
+
+/*******************************************************************************
+ * Privates macros
+ ******************************************************************************/
+#define TEMPMAXIMA 34 //Temperatura maxima permitida antes de activar la refrigeracion
+#define TEMPMINIMA 22 //Temperatura minima permitida antes de activar la calefaccion
+
+/*******************************************************************************
+ * Private global variables
+ ******************************************************************************/
+
+static ClimaState_t estadoActual;
+static int8_t temperaturaActual; //variable para cargar la temperatura sensada en otro modulo
+
+
+void climaMEF_init(){
+	estadoActual = CALIBRACION;
+
+}
+
+/**
+ * @brief	funcion para el manejo de los 4 estados y control del CLIMA
+ * @param	none
+ * @return	none
+ */
+void climaMEF_update(){
+	switch (estadoActual){
+	case CALIBRACION:
+		temperaturaActual = tomaTemperatura();
+		if (temperaturaActual < TEMPMINIMA){
+			estadoActual = FRIO;
+			activaCalefaccion(HIGH);
+		}
+		if (temperaturaActual > TEMPMAXIMA){
+			estadoActual = CALIDO;
+			activaRefrigeracion(HIGH);
+		}
+		break;
+
+	case FRIO:
+		temperaturaActual = tomaTemperatura();
+		if (temperaturaActual > TEMPMINIMA){
+			estadoActual = REPOSO;
+			activaCalefaccion(LOW);
+		}
+		break;
+
+	case CALIDO:
+		temperaturaActual = tomaTemperatura();
+		if (temperaturaActual < TEMPMAXIMA){
+			estadoActual = REPOSO;
+			activaRefrigeracion(LOW);
+		}
+		break;
+
+	case REPOSO:
+		temperaturaActual = tomaTemperatura();
+		if (temperaturaActual > TEMPMAXIMA){
+			estadoActual = CALIDO;
+			activaRefrigeracion(HIGH);
+		}
+		else if (temperaturaActual < TEMPMINIMA){
+			estadoActual = FRIO;
+			activaCalefaccion(HIGH);
+		}
+		break;
+
+	default: //En caso de no recibir un estado identificado se reinicia la MEF
+		climaMEF_init();
+	}
+}
+
+

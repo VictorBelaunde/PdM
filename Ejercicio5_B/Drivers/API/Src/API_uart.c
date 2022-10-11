@@ -24,6 +24,28 @@ uint16_t tamaño_maximo_mensaje = 500; //Configuro el tamaño maximo del mensaje
 const uint32_t tiempo_max_espera = 1000; //Se define el tiempo antes de timeOut
 
 
+/* Private function prototypes -----------------------------------------------*/
+#ifdef __GNUC__
+/* With GCC, small printf (option LD Linker->Libraries->Small printf set to 'Yes') calls __io_putchar() */
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
+
+/*******************************************************************************
+  * @brief  Retargets the C library printf function to the USART.
+  * @param  None
+  * @retval None
+  */
+PUTCHAR_PROTOTYPE
+{
+  /* Place your implementation of fputc here */
+  /* e.g. write a character to the USART3 and Loop until the end of transmission */
+  HAL_UART_Transmit(&UartHandle, (uint8_t *)&ch, 1, 0xFFFF);
+  return ch;
+}
+
+
 /**
  * @brief	funcion que inicializa la UART
  * @param	none
@@ -93,6 +115,12 @@ void uartSendStringSize(uint8_t * pstring, uint16_t size){
 
 }
 
+
+/**
+ * @brief	Recibe mensaje por UART por medio de polling (encuesta)
+ * @param	puntero a la cadena que se carga de recibir algo por el puerto y el tamaño del "buffer"
+ * @return	none
+ */
 void uartReceiveStringSize(uint8_t * pstring, uint16_t size){
 
 	HAL_UART_Receive(&UartHandle, pstring, size, tiempo_max_espera);

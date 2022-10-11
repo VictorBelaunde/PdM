@@ -1,0 +1,144 @@
+/*******************************************************************************
+ * @file    API_uart.c
+ * @author  Victor Belaunde
+ * @brief   Modulo para incializar e imprimir por el puerto UART
+ *******************************************************************************/
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
+
+#include "API_uart.h"
+
+
+#ifdef __GNUC__
+/* With GCC, small printf (option LD Linker->Libraries->Small printf
+   set to 'Yes') calls __io_putchar() */
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
+
+/*******************************************************************************
+ * Private global variables
+ ******************************************************************************/
+static UART_HandleTypeDef UartHandle;
+
+
+/**
+ * @brief	funcion que inicializa la UART con todos sus parametros
+ * @param	none
+ * @return	verdadero si inicio correctamente
+ */
+bool_t uartInit(){
+	/* UART configured as follows:
+	      - Word Length = 8 Bits (7 data bit + 1 parity bit) :
+		                  BE CAREFUL : Program 7 data bits + 1 parity bit in PC HyperTerminal
+	      - Stop Bit    = One Stop bit
+	      - Parity      = None
+	      - BaudRate    = 9600 baud
+	      - Hardware flow control disabled (RTS and CTS signals) */
+	UartHandle.Instance        = USARTx;
+	UartHandle.Init.BaudRate   = 9600;
+	UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
+	UartHandle.Init.StopBits   = UART_STOPBITS_1;
+	UartHandle.Init.Parity     = UART_PARITY_NONE;
+	UartHandle.Init.HwFlowCtl  = UART_HWCONTROL_NONE;
+	UartHandle.Init.Mode       = UART_MODE_TX_RX;
+	UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
+	bool_t init_uart_ok = false;
+
+	if (HAL_UART_Init(&UartHandle) == HAL_OK)
+	{
+		init_uart_ok = true;
+		printf("** UART iniciada ** \n\r");
+	}
+
+	return init_uart_ok;
+}
+
+
+/**
+ * @brief	funcion que transmite un mensaje por UART
+ * @param	puntero a la cadena que envia
+ * @return	none
+ */
+void uartSendString(uint8_t * pstring){
+
+	if (pstring != NULL){
+		uint16_t tamaño_mensaje = (uint16_t) strlen((char *) pstring); //Calcula el tamaño del mensaje
+
+		HAL_UART_Transmit(&UartHandle, pstring, tamaño_mensaje, tiempo_max_espera);
+	}
+
+}
+
+/**
+ * @brief	funcion que transmite un mensaje por UART acotado por una cantidad de caracteres
+ * @param	puntero a la cadena que envia y cantidad de caracteres
+ * @return	none
+ */
+void uartSendStringSize(uint8_t * pstring, uint16_t size){
+
+	if (pstring!= NULL){
+		uint16_t tamaño_mensaje = (uint16_t) strlen((char *) pstring); //Calcula el tamaño del mensaje
+		if (size > tamaño_mensaje){
+			size = tamaño_mensaje;
+		}
+		if (size > tamaño_maximo_mensaje){
+			size = tamaño_maximo_mensaje;
+		}
+		HAL_UART_Transmit(&UartHandle, pstring, size, tiempo_max_espera);
+	}
+
+}
+
+/**
+ * @brief	Recibe mensaje por UART por medio de polling (encuesta)
+ * @param	puntero a la cadena que se carga de recibir algo por el puerto y el tamaño del "buffer"
+ * @return	true si completó el tamaño del buffer, de lo contrario no dispara HAL_OK
+ */
+bool_t uartReceiveStringSize(uint8_t * pstring, uint16_t size){
+
+	if (HAL_UART_Receive(&UartHandle, pstring, size, tiempo_max_espera)== HAL_OK){
+		return true;
+	}
+	else{
+		return false;
+	}
+
+}
+
+
+/**
+ * @brief	Convierte el char de 2 elementos recibido en un numero de 2 cifras
+ * @param	puntero a la cadena que se carga de recibir algo por el puerto
+ * @return	totalConvertido que es el numero entero de 2 cifras
+ */
+uint8_t convierteNumero(uint8_t * datosConvertir){
+	uint8_t totalConvertido = 0;//variables auxiliares
+	uint8_t convEntero1erCifra = 0;
+	uint8_t convEntero2daCifra =0;
+
+	convEntero1erCifra = datosConvertir[0]-'0'; //Se realiza una resta de numeros ASCII para obtener la representacion del número. El ‘0’ tiene el código ASCII 48, eje '2'-'0' es igual a 50-48=2.
+
+	totalConvertido = convEntero1erCifra * 10; //Se multiplica por 10 para obtener la representacion decimal de un numero de dos cifras
+	convEntero2daCifra = datosConvertir[1]-'0'; //Este no multiplica porque es el digito que representa la unidad en un numero de dos cifras
+	totalConvertido = totalConvertido + convEntero2daCifra;
+
+
+	return totalConvertido;
+}
+
+
+PUTCHAR_PROTOTYPE
+{
+	/* Place your implementation of fputc here */
+	/* e.g. write a character to the USART3 and Loop until the end of transmission */
+	HAL_UART_Transmit(&UartHandle, (uint8_t *)&ch, 1, 0xFFFF);
+
+	return ch;
+}
+
+
+

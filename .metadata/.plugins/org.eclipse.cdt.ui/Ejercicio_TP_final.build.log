@@ -1,0 +1,10 @@
+22:45:12 **** Incremental Build of configuration Debug for project Ejercicio_TP_final ****
+make -j7 all 
+arm-none-eabi-size   Ejercicio_TP_final.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6480	     32	   1568	   8080	   1f90	Ejercicio_TP_final.elf
+Finished building: default.size.stdout
+ 
+
+22:45:12 Build Finished. 0 errors, 0 warnings. (took 413ms)
+
